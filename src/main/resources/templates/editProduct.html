@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html xmlns:th="http://thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Product</title>
+    <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+<header>
+    <h1>Edit Product</h1>
+    <nav>
+        <ul>
+            <li><a th:href="@{/}">Home</a></li>
+            <li><a th:href="@{/products}">Products</a></li>
+            <li><a th:href="@{/cart}">View Cart</a></li>
+            <li><a th:href="@{/about}">About Us</a></li>
+            <li><a th:href="@{/contact}">Contact</a></li>
+        </ul>
+    </nav>
+</header>
+<main>
+    <form th:action="@{/updateProduct/{id}(id=${product.id}})" th:object="${product}" method="post">
+        <label for="name">Product Name:</label>
+        <input type="text" id="name" th:field="*{name}" required>
+        <br>
+
+        <label for="description">Description:</label>
+        <textarea id="description" th:field="*{description}" required></textarea>
+        <br>
+
+        <label for="price">Price:</label>
+        <input type="number" id="price" th:field="*{price}" step="0.01" required>
+        <br>
+
+        <label for="imageUrl">Image URL:</label>
+        <input type="text" id="imageUrl" th:field="*{imageUrl}" required>
+        <br>
+
+        <label for="featured">Featured:</label>
+        <input type="number" id="featured" th:field="*{featured}" required>
+        <br>
+
+        <button type="submit">Update Product</button>
+    </form>
+</main>
+</body>
+</html>

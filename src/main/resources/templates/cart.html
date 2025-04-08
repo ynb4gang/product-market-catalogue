@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html xmlns:th="http://thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us -E-commerce Product Catalog</title>
+    <link rel="stylesheet" href="/cartStyle.css">
+</head>
+<body>
+<header>
+    <h1>Shopping Cart</h1>
+    <nav>
+        <ul>
+            <li><a th:href="@{/}">Home</a></li>
+            <li><a th:href="@{/products}">Products</a></li>
+            <li><a th:href="@{/cart}">View Cart</a></li>
+            <li><a th:href="@{/about}">About Us</a></li>
+            <li><a th:href="@{/contact}">Contact</a></li>
+        </ul>
+    </nav>
+</header>
+<main>
+    <table>
+        <thead>
+        <tr>
+            <th>Product Name</th>
+            <th>Price</th>
+            <th>Quantity</th>
+            <th>Total</th>
+            <th>Actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:if="${cartItems != null}" th:each="entry : ${cartItems.entrySet()}">
+            <td th:text="${entry.key.name}"></td>
+            <td th:text="${entry.key.price}"></td>
+            <td th:text="${entry.value}"></td>
+            <td th:text="${entry.key.price * entry.value}"></td>
+            <td>
+                <form th:action="@{/removeFromCart/{id}(id=${entry.key.id})}" method="post">
+                    <button type="submit">Remove</button>
+                </form>
+            </td>
+        </tr>
+        <tr th:if="${cartItems == null}">
+            <td colspan="5">Your cart is empty.</td>
+        </tr>
+        </tbody>
+    </table>
+    <form th:action="@{/clearCart}" method="post">
+        <button type="submit">Clear Cart</button>
+    </form>
+</main>
+</body>
+</html>
